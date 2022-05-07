@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, Row, Col } from "antd";
-import { EditorState, convertToRaw } from "draft-js";
+import { Card, Row } from "antd";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./index.less";
