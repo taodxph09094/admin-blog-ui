@@ -8,23 +8,27 @@ const users = {
   "admin-token": {
     id: "admin",
     role: "admin",
-    name: "难凉热血",
-    avatar: "https://s1.ax1x.com/2020/04/28/J5hUaT.jpg",
-    description: "拥有系统内所有菜单和路由权限",
+    name: "Tao Xuan Dang",
+    avatar:
+      "https://scontent.fhan2-1.fna.fbcdn.net/v/t1.6435-9/122861955_709385313012197_8245357468634257824_n.jpg?_nc_cat=101&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=r6sOwxVSNZAAX8Ic1FT&tn=Ggmf3f38_8N-3Xty&_nc_ht=scontent.fhan2-1.fna&oh=00_AT9ri2v3i_o8Bplk0X3CaeGPvlsgiRrZUE91LQNNeYun5Q&oe=629A53B8",
+    description: "Có tất cả các quyền trình trong hệ thống",
   },
   "editor-token": {
     id: "editor",
     role: "editor",
-    name: "编辑员",
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:"可以看到除户管理页面之外的所有页面",
+    name: "Thùy Linh",
+    avatar:
+      "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/279287205_762837011352798_8861342554435188756_n.jpg?_nc_cat=107&ccb=1-6&_nc_sid=09cbfe&_nc_ohc=om2-rV53IssAX-M5yU9&_nc_ht=scontent.fhan2-3.fna&oh=00_AT8cXYz5yzUPSTWQ5XrlV3DROUdRh8ZFgVFH_n0jNwvqMw&oe=627B4E61",
+    description:
+      "Có thể xem tất cả các trang ngoại trừ trang quản lý người dùng",
   },
   "guest-token": {
     id: "guest",
     role: "guest",
-    name: "游客",
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:"仅能看到Dashboard、作者博客、权限测试和关于作者四个页面",
+    name: "Khách",
+    avatar:
+      "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png",
+    description: "Chỉ có thể xem Dashboard",
   },
 };
 
@@ -35,7 +39,7 @@ export default {
     if (!token) {
       return {
         status: 1,
-        message: "用户名或密码错误",
+        message: "Tên người dùng hoặc mật khẩu sai",
       };
     }
     return {
@@ -49,7 +53,7 @@ export default {
     if (!userInfo) {
       return {
         status: 1,
-        message: "获取用户信息失败",
+        message: "Không lấy được thông tin người dùng",
       };
     }
     return {
@@ -94,18 +98,18 @@ export default {
       };
     } else {
       return {
-        status: 0
+        status: 0,
       };
     }
   },
   addUser: (config) => {
     const data = JSON.parse(config.body);
     const { id } = data;
-    tokens[id] = `${id}-token`
+    tokens[id] = `${id}-token`;
     users[`${id}-token`] = {
       ...users["guest-token"],
-      ...data
-    }
+      ...data,
+    };
     return {
       status: 0,
     };

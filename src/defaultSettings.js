@@ -1,10 +1,11 @@
 export default {
   /**
    * @type {boolean} true | false
-   * @description Whether show the settings right-panel
+   * @description 
+Cho dù hiển thị bảng cài đặt bên phải
    */
   showSettings: true,
-  // 如果只想在开发环境下显示系统设置面板，生产环境下不显示，那么请打开下面这行代码
+  // Nếu bạn chỉ muốn hiển thị bảng cài đặt hệ thống trong môi trường phát triển chứ không muốn hiển thị trong môi trường sản xuất, vui lòng mở dòng mã sau
   // showSettings: process.env.NODE_ENV === "development",
 
   /**
@@ -18,7 +19,7 @@ export default {
    * @description Whether fix the header
    */
   fixedHeader: false,
-  
+
   /**
    * @type {boolean} true | false
    * @description Whether need tagsView

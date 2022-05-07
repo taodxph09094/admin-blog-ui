@@ -5,7 +5,8 @@ import excelAPI from "./excel";
 import tableAPI from "./table";
 import monitor from "./monitor";
 
-// 登录与用户相关
+// Đăng nhập được liên kết với người dùng
+
 Mock.mock(/\/login/, "post", loginAPI.login);
 Mock.mock(/\/logout/, "post", loginAPI.logout);
 Mock.mock(/\/userInfo/, "post", loginAPI.userInfo);
@@ -14,7 +15,6 @@ Mock.mock(/\/user\/delete/, "post", loginAPI.deleteUser);
 Mock.mock(/\/user\/edit/, "post", loginAPI.editUser);
 Mock.mock(/\/user\/validatUserID/, "post", loginAPI.ValidatUserID);
 Mock.mock(/\/user\/add/, "post", loginAPI.addUser);
-
 
 // dashboard
 Mock.mock(/\/transaction\/list/, "get", remoteSearchAPI.transactionList);

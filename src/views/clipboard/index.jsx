@@ -1,24 +1,24 @@
 import React from "react";
-import clip from "@/utils/clipboard"; 
+import clip from "@/utils/clipboard";
 import { Button, Row, Col } from "antd";
 
 const text = `
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép,
+  Văn bản đã được sao chép
   `;
 const handleCopy = (text, event) => {
   clip(text, event);
@@ -26,7 +26,9 @@ const handleCopy = (text, event) => {
 const Clipboard = () => {
   return (
     <div className="app-container">
-      <h1>点击下方的Copy按钮，可将以下文字复制到剪贴板</h1>
+      <h1>
+        Nhấp vào nút Sao chép bên dưới để sao chép văn bản sau vào khay nhớ tạm
+      </h1>
       <br />
       <Row>
         <Col span={12}>{text}</Col>
@@ -41,7 +43,7 @@ const Clipboard = () => {
               handleCopy(text, e);
             }}
           >
-            Copy
+            Sao chép
           </Button>
         </Col>
       </Row>

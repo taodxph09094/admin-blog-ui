@@ -63,7 +63,7 @@ export function injectJsError() {
           errorType: JS_TRACKER_ERROR_DISPLAY_MAP[ERROR_RUNTIME], // Lỗi thực thi JS
           desc: `${message} at ${filename}:${lineno}:${colno}`,
           stack: error && error.stack ? error.stack : "no stack",
-          selector: lastEvent ? getSelector(lastEvent.path) : "", //代表最后一个操作的元素
+          selector: lastEvent ? getSelector(lastEvent.path) : "", //phần tử đại diện cho hoạt động cuối cùng
         });
       }
     },
@@ -72,7 +72,7 @@ export function injectJsError() {
   window.addEventListener(
     "unhandledrejection",
     (event) => {
-      let lastEvent = getLastEvent(); //最后一个交互事件
+      let lastEvent = getLastEvent(); // sự kiện tương tác cuối cùng
       let message;
       let filename;
       let lineno = 0;
@@ -82,7 +82,7 @@ export function injectJsError() {
       if (typeof reason === "string") {
         message = reason;
       } else if (typeof reason === "object") {
-        //说明是一个错误对象
+        //Mô tả là một đối tượng lỗi
         message = reason.message;
         if (reason.stack) {
           let matchResult = reason.stack.match(/at\s+(.+):(\d+):(\d+)/);
@@ -93,11 +93,13 @@ export function injectJsError() {
         stack = reason.stack;
       }
       tracker.send({
-        kind: "stability", //监控指标的大类
-        errorType: JS_TRACKER_ERROR_DISPLAY_MAP[ERROR_RUNTIME], //JS执行错误
+        kind: "stability", //Các loại chỉ số giám sát
+
+        errorType: JS_TRACKER_ERROR_DISPLAY_MAP[ERROR_RUNTIME], //Lỗi thực thi JS
+
         desc: `${message} at ${filename}:${lineno}:${colno}`,
         stack,
-        selector: lastEvent ? getSelector(lastEvent.path) : "", //代表最后一个操作的元素
+        selector: lastEvent ? getSelector(lastEvent.path) : "", //phần tử đại diện cho hoạt động cuối cùng
       });
     },
     true

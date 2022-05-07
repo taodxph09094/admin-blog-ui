@@ -1,6 +1,8 @@
 /**
- * icon:菜单项图标
- * roles:标明当前菜单项在何种角色下可以显示，如果不写此选项，表示该菜单项完全公开，在任何角色下都显示
+ * icon:Biểu tượng
+ * roles:Cho biết mục menu hiện tại có thể được hiển thị dưới vai trò nào.
+ * Nếu tùy chọn này không được viết,
+ * điều đó có nghĩa là mục menu hoàn toàn ở chế độ công khai và được hiển thị dưới bất kỳ vai trò nào.
  */
 const menuList = [
   {
@@ -16,22 +18,22 @@ const menuList = [
     icon: "lock",
     children: [
       {
-        title: "mục 1",
+        title: "Page",
         path: "/permission/explanation",
         roles: ["admin"],
       },
       {
-        title: "mục 2",
+        title: "Admin page",
         path: "/permission/adminPage",
         roles: ["admin"],
       },
       {
-        title: "mục 3",
+        title: "Guest page",
         path: "/permission/guestPage",
         roles: ["guest"],
       },
       {
-        title: "mục 4",
+        title: "Editor page",
         path: "/permission/editorPage",
         roles: ["editor"],
       },

@@ -2,10 +2,9 @@ export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result;
 
   const later = function () {
-    // 据上一次触发时间间隔
+    //
     const last = +new Date() - timestamp;
 
-    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
     if (last < wait && last > 0) {
       timeout = setTimeout(later, wait - last);
     } else {
@@ -32,7 +31,7 @@ export function debounce(func, wait, immediate) {
     return result;
   };
 }
-// 根据某个属性值从MenuList查找拥有该属性值的menuItem
+// Tìm menuItem với giá trị thuộc tính từ MenuList dựa trên giá trị thuộc tính
 export function getMenuItemInMenuListByProperty(menuList, key, value) {
   let stack = [];
   stack = stack.concat(menuList);
@@ -57,13 +56,19 @@ export function getMenuItemInMenuListByProperty(menuList, key, value) {
 
 export function timestampToTime(timestamp) {
   var date = new Date(timestamp);
-  var Y = date.getFullYear() + '-';
-  var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-  var D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
-  var h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
-  var m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
-  var s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());
-  
-  let strDate = Y+M+D+h+m+s;
+  var Y = date.getFullYear() + "-";
+  var M =
+    (date.getMonth() + 1 < 10
+      ? "0" + (date.getMonth() + 1)
+      : date.getMonth() + 1) + "-";
+  var D = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " ";
+  var h =
+    (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
+  var m =
+    (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+    ":";
+  var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+  let strDate = Y + M + D + h + m + s;
   return strDate;
 }

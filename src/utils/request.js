@@ -68,11 +68,11 @@ service.interceptors.response.use(
     const { status } = error.response;
     if (status === 403) {
       Modal.confirm({
-        title: "确定登出?",
+        title: "Bạn có muốn đăng xuất?",
         content:
-          "由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录",
-        okText: "重新登录",
-        cancelText: "取消",
+          "Do tình trạng hoạt động không lâu nên đã đăng xuất，bạn có thể hủy ở lại trang này hoặc đăng nhập lại",
+        okText: "Đăng nhập lại",
+        cancelText: "Hủy bỏ",
         onOk() {
           let token = store.getState().user.token;
           store.dispatch(logout(token));

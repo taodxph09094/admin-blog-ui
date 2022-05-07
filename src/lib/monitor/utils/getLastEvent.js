@@ -1,12 +1,18 @@
 let lastEvent;
-['click', 'touchstart', 'mousedown', 'keydown', 'mouseover'].forEach(eventType => {
-    document.addEventListener(eventType, (event) => {
+["click", "touchstart", "mousedown", "keydown", "mouseover"].forEach(
+  (eventType) => {
+    document.addEventListener(
+      eventType,
+      (event) => {
         lastEvent = event;
-    }, {
-        capture: true,//捕获阶段
-        passive: true//默认不阻止默认事件
-    });
-});
+      },
+      {
+        capture: true,
+        passive: true,
+      }
+    );
+  }
+);
 export default function () {
-    return lastEvent;
+  return lastEvent;
 }

@@ -1,92 +1,98 @@
-import tracker from '../utils/tracker';
-import onload from '../utils/onload';
-import getLastEvent from '../utils/getLastEvent';
-import getSelector from '../utils/getSelector';
+import tracker from "../utils/tracker";
+import onload from "../utils/onload";
+import getLastEvent from "../utils/getLastEvent";
+import getSelector from "../utils/getSelector";
 export function timing() {
-    let FMP, LCP;
-    // 增加一个性能条目的观察者
-    if (PerformanceObserver) {
-        new PerformanceObserver((entryList, observer) => {
-            let perfEntries = entryList.getEntries();
-            FMP = perfEntries[0];//startTime 2000以后
-            observer.disconnect();//不再观察了
-        }).observe({ entryTypes: ['element'] });//观察页面中的意义的元素
+  let FMP, LCP;
+  // Thêm người quan sát cho mục nhập hiệu suất
+  if (PerformanceObserver) {
+    new PerformanceObserver((entryList, observer) => {
+      let perfEntries = entryList.getEntries();
+      FMP = perfEntries[0]; //startTime sau 2000
+      observer.disconnect(); //không còn quan sát
+    }).observe({ entryTypes: ["element"] }); //Các yếu tố để quan sát ý nghĩa của trang
 
-        new PerformanceObserver((entryList, observer) => {
-            let perfEntries = entryList.getEntries();
-            LCP = perfEntries[0];
-            observer.disconnect();//不再观察了
-        }).observe({ entryTypes: ['largest-contentful-paint'] });//观察页面中的意义的元素
+    new PerformanceObserver((entryList, observer) => {
+      let perfEntries = entryList.getEntries();
+      LCP = perfEntries[0];
+      observer.disconnect(); //không còn quan sát
+    }).observe({ entryTypes: ["largest-contentful-paint"] }); //Các yếu tố để quan sát ý nghĩa của trang
 
-        new PerformanceObserver((entryList, observer) => {
-            let lastEvent = getLastEvent();
-            let firstInput = entryList.getEntries()[0];
-            console.log('FID', firstInput);
-            if (firstInput) {
-                //processingStart开始处理的时间 startTime开点击的时间 差值就是处理的延迟
-                let inputDelay = firstInput.processingStart - firstInput.startTime;
-                let duration = firstInput.duration;//处理的耗时
-                if (inputDelay > 0 || duration > 0) {
-                    tracker.send({
-                        kind: 'experience',//用户体验指标
-                        type: 'firstInputDelay',//首次输入延迟
-                        inputDelay,//延时的时间
-                        duration,//处理的时间
-                        startTime: firstInput.startTime,
-                        selector: lastEvent ? getSelector(lastEvent.path || lastEvent.target) : ''
-                    });
-                }
+    new PerformanceObserver((entryList, observer) => {
+      let lastEvent = getLastEvent();
+      let firstInput = entryList.getEntries()[0];
+      console.log("FID", firstInput);
+      if (firstInput) {
+        //thời gian để bắt đầu xử lý Sự khác biệt trong thời gian để mở nhấp chuột là độ trễ xử lý
 
-            }
-            observer.disconnect();//不再观察了
-        }).observe({ type: 'first-input', buffered: true });//观察页面中的意义的元素
-    }
+        let inputDelay = firstInput.processingStart - firstInput.startTime;
+        let duration = firstInput.duration; //Thời gian xử lý
 
-    //用户的第一次交互 点击页面 
-    onload(function () {
-        setTimeout(() => {
-            const {
-                fetchStart,
-                connectStart,
-                connectEnd,
-                requestStart,
-                responseStart,
-                responseEnd,
-                domLoading,
-                domInteractive,
-                domContentLoadedEventStart,
-                domContentLoadedEventEnd,
-                loadEventStart
-            } = performance.timing;
-            tracker.send({
-                kind: 'experience',//用户体验指标
-                type: 'timing',//统计每个阶段的时间
-                connectTime: connectEnd - connectStart,//连接时间
-                ttfbTime: responseStart - requestStart,//首字节到达时间
-                responseTime: responseEnd - responseStart,//响应的读取时间
-                parseDOMTime: loadEventStart - domLoading,//DOM解析的时间
-                domContentLoadedTime: domContentLoadedEventEnd - domContentLoadedEventStart,
-                timeToInteractive: domInteractive - fetchStart,//首次可交互时间
-                loadTIme: loadEventStart - fetchStart //完整的加载时间
-            });
+        if (inputDelay > 0 || duration > 0) {
+          tracker.send({
+            kind: "experience", //Chỉ số trải nghiệm người dùng
+            type: "firstInputDelay", //đầu vào đầu tiên chậm trễ
 
+            inputDelay, //thời gian trì hoãn
 
-            let FP = performance.getEntriesByName('first-paint')[0];
-            let FCP = performance.getEntriesByName('first-contentful-paint')[0];
-            //开始发送性能指标
-            console.log('FP', FP);
-            console.log('FCP', FCP);
-            console.log('FMP', FMP);
-            console.log('LCP', LCP);
-            tracker.send({
-                kind: 'experience',//用户体验指标
-                type: 'paint',//统计每个阶段的时间
-                firstPaint: FP.startTime,
-                firstContentfulPaint: FCP.startTime,
-                firstMeaningfulPaint: FMP.startTime,
-                largestContentfulPaint: LCP.startTime
-            });
-        }, 3000);
-    });
+            duration, //Thời gian xử lý
 
+            startTime: firstInput.startTime,
+            selector: lastEvent
+              ? getSelector(lastEvent.path || lastEvent.target)
+              : "",
+          });
+        }
+      }
+      observer.disconnect(); //không còn quan sát
+    }).observe({ type: "first-input", buffered: true }); //Các yếu tố để quan sát ý nghĩa của trang
+  }
+
+  //Lần tương tác đầu tiên của người dùng Nhấp vào trang
+
+  onload(function () {
+    setTimeout(() => {
+      const {
+        fetchStart,
+        connectStart,
+        connectEnd,
+        requestStart,
+        responseStart,
+        responseEnd,
+        domLoading,
+        domInteractive,
+        domContentLoadedEventStart,
+        domContentLoadedEventEnd,
+        loadEventStart,
+      } = performance.timing;
+      tracker.send({
+        kind: "experience",
+        type: "timing",
+        connectTime: connectEnd - connectStart,
+        ttfbTime: responseStart - requestStart,
+        responseTime: responseEnd - responseStart,
+        parseDOMTime: loadEventStart - domLoading,
+        domContentLoadedTime:
+          domContentLoadedEventEnd - domContentLoadedEventStart,
+        timeToInteractive: domInteractive - fetchStart,
+        loadTIme: loadEventStart - fetchStart,
+      });
+
+      let FP = performance.getEntriesByName("first-paint")[0];
+      let FCP = performance.getEntriesByName("first-contentful-paint")[0];
+
+      console.log("FP", FP);
+      console.log("FCP", FCP);
+      console.log("FMP", FMP);
+      console.log("LCP", LCP);
+      tracker.send({
+        kind: "experience",
+        type: "paint",
+        firstPaint: FP.startTime,
+        firstContentfulPaint: FCP.startTime,
+        firstMeaningfulPaint: FMP.startTime,
+        largestContentfulPaint: LCP.startTime,
+      });
+    }, 3000);
+  });
 }

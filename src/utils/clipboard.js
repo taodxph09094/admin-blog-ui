@@ -2,11 +2,11 @@ import Clipboard from "clipboard";
 import { message } from "antd";
 
 function clipboardSuccess() {
-  message.success("复制成功");
+  message.success("Sao chép thành công");
 }
 
 function clipboardError() {
-  message.error("复制失败");
+  message.error("Sao chép không thành công");
 }
 
 export default function handleClipboard(text, event) {

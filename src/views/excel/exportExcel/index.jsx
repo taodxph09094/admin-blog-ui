@@ -23,14 +23,14 @@ const columns = [
     align: "center",
   },
   {
-    title: "Title",
+    title: "Tên tệp",
     dataIndex: "title",
     key: "title",
     width: 200,
     align: "center",
   },
   {
-    title: "Author",
+    title: "Người tạo",
     key: "author",
     dataIndex: "author",
     width: 100,
@@ -38,14 +38,14 @@ const columns = [
     render: (author) => <Tag key={author}>{author}</Tag>,
   },
   {
-    title: "Readings",
+    title: "Lượt đọc",
     dataIndex: "readings",
     key: "readings",
     width: 195,
     align: "center",
   },
   {
-    title: "Date",
+    title: "Ngày xuất",
     dataIndex: "date",
     key: "date",
     width: 195,
@@ -53,7 +53,7 @@ const columns = [
   },
 ];
 class Excel extends Component {
-  _isMounted = false; // 这个变量是用来标志当前组件是否挂载
+  _isMounted = false; //Biến này được sử dụng để cho biết thành phần hiện tại có được gắn kết hay không
   state = {
     list: [],
     filename: "excel-file",
@@ -83,15 +83,15 @@ class Excel extends Component {
   };
   handleDownload = (type) => {
     if (type === "selected" && this.state.selectedRowKeys.length === 0) {
-      message.error("至少选择一项进行导出");
+      message.error("Chọn ít nhất một mục để xuất");
       return;
     }
     this.setState({
       downloadLoading: true,
     });
     import("@/lib/Export2Excel").then((excel) => {
-      const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
-      const filterVal = ["id", "title", "author", "readings", "date"];
+      const tHeader = ["Id", "Tên tệp", "Người tạo", "Lượt đọc", "Ngày xuất"];
+      const filterVal = ["id", "tên tệp", "người tạo", "lượt đọc", "ngày xuất"];
       const list = type === "all" ? this.state.list : this.state.selectedRows;
       const data = this.formatJson(filterVal, list);
       excel.export_json_to_excel({
@@ -108,7 +108,7 @@ class Excel extends Component {
     });
   };
   formatJson(filterVal, jsonData) {
-    return jsonData.map(v => filterVal.map(j => v[j]))
+    return jsonData.map((v) => filterVal.map((j) => v[j]));
   }
   filenameChange = (e) => {
     this.setState({
@@ -134,28 +134,28 @@ class Excel extends Component {
     return (
       <div className="app-container">
         <Collapse defaultActiveKey={["1"]}>
-          <Panel header="导出选项" key="1">
+          <Panel header="Tùy chọn xuất file" key="1">
             <Form layout="inline">
-              <Form.Item label="文件名:">
+              <Form.Item label="Tên tệp:">
                 <Input
                   style={{ width: "250px" }}
                   prefix={
                     <Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="请输入文件名(默认excel-file)"
+                  placeholder="Vui lòng nhập tên tệp (mặc định excel-file)"
                   onChange={this.filenameChange}
                 />
               </Form.Item>
-              <Form.Item label="单元格宽度是否自适应:">
+              <Form.Item label="Chiều rộng ô có thích ứng hay không:">
                 <Radio.Group
                   onChange={this.autoWidthChange}
                   value={this.state.autoWidth}
                 >
-                  <Radio value={true}>是</Radio>
-                  <Radio value={false}>否</Radio>
+                  <Radio value={true}>Có</Radio>
+                  <Radio value={false}>Không</Radio>
                 </Radio.Group>
               </Form.Item>
-              <Form.Item label="文件类型:">
+              <Form.Item label="Loại tệp:">
                 <Select
                   defaultValue="xlsx"
                   style={{ width: 120 }}
@@ -172,7 +172,7 @@ class Excel extends Component {
                   icon="file-excel"
                   onClick={this.handleDownload.bind(null, "all")}
                 >
-                  全部导出
+                  Xuất tất cả các file trong bảng
                 </Button>
               </Form.Item>
               <Form.Item>
@@ -181,7 +181,7 @@ class Excel extends Component {
                   icon="file-excel"
                   onClick={this.handleDownload.bind(null, "selected")}
                 >
-                  导出已选择项
+                  Xuất các file đã chọn
                 </Button>
               </Form.Item>
             </Form>

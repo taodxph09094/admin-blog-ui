@@ -33,17 +33,11 @@ const Dashboard = () => {
     lineChartDefaultData["New Visits"]
   );
 
-  const handleSetLineChartData = (type) => setLineChartData(lineChartDefaultData[type]);
+  const handleSetLineChartData = (type) =>
+    setLineChartData(lineChartDefaultData[type]);
 
   return (
     <div className="app-container">
-      <a
-        href="https://github.com/NLRX-WJC/react-antd-admin-template"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="github-corner"
-      ></a>
-
       <PanelGroup handleSetLineChartData={handleSetLineChartData} />
 
       <LineChart
