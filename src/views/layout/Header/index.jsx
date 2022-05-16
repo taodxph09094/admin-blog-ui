@@ -23,10 +23,10 @@ const LayoutHeader = (props) => {
   token && getUserInfo(token);
   const handleLogout = (token) => {
     Modal.confirm({
-      title: "注销",
-      content: "确定要退出系统吗?",
-      okText: "确定",
-      cancelText: "取消",
+      title: "Đăng xuất",
+      content: "Bạn có chắc chắn đăng xuất?",
+      okText: "Chắc chắn",
+      cancelText: "Hủy",
       onOk: () => {
         logout(token);
       },
@@ -44,19 +44,15 @@ const LayoutHeader = (props) => {
   const menu = (
     <Menu onClick={onClick}>
       <Menu.Item key="dashboard">
-        <Link to="/dashboard">首页</Link>
+        <Link to="/dashboard">Trang chủ</Link>
       </Menu.Item>
       <Menu.Item key="project">
-        <a
-          target="_blank"
-          href="https://github.com/NLRX-WJC/react-antd-admin-template"
-          rel="noopener noreferrer"
-        >
-          项目地址
+        <a target="_blank" href="#" rel="noopener noreferrer">
+          Profile
         </a>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="logout">注销</Menu.Item>
+      <Menu.Item key="logout">Đăng xuất</Menu.Item>
     </Menu>
   );
   const computedStyle = () => {

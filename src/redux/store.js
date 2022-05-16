@@ -1,13 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-// import reduxThunk from "redux-thunk";
-// import reducer from "./reducers";
-import user from "./reducers/user";
-import app from "./reducers/app";
-import settings from "./reducers/settings";
-import tagsView from "./reducers/tagsView";
-import monitor from "./reducers/monitor";
 import {
   newPostReducer,
   newReviewReducer,
@@ -39,11 +32,6 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   postReviews: postReviewsReducer,
   review: reviewReducer,
-  user,
-  app,
-  settings,
-  tagsView,
-  monitor,
 });
 
 const middleware = [thunk];

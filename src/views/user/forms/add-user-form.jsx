@@ -6,15 +6,15 @@ class AddUserForm extends Component {
   validatUserID = async (rule, value, callback) => {
     if (value) {
       if (!/^[a-zA-Z0-9]{1,6}$/.test(value)) {
-        callback("用户ID必须为1-6位数字或字母组合");
+        callback("ID người dùng phải gồm 1-6 chữ số hoặc kết hợp các chữ cái");
       }
       let res = await reqValidatUserID(value);
       const { status } = res.data;
       if (status) {
-        callback("该用户ID已存在");
+        callback("ID người dùng đã tồn tại");
       }
     } else {
-      callback("请输入用户ID");
+      callback("Vui lòng nhập ID người dùng");
     }
     callback();
   };
@@ -31,24 +31,26 @@ class AddUserForm extends Component {
     };
     return (
       <Modal
-        title="编辑"
+        title="Tạo tài khoản"
         visible={visible}
         onCancel={onCancel}
         onOk={onOk}
         confirmLoading={confirmLoading}
       >
         <Form {...formItemLayout}>
-          <Form.Item label="用户ID:">
+          <Form.Item label="ID:">
             {getFieldDecorator("id", {
               rules: [{ required: true, validator: this.validatUserID }],
-            })(<Input placeholder="请输入用户ID" />)}
+            })(<Input placeholder="Nhập ID" />)}
           </Form.Item>
-          <Form.Item label="用户名称:">
+          <Form.Item label="Họ tên:">
             {getFieldDecorator("name", {
-              rules: [{ required: true, message: "请输入用户名称!" }],
-            })(<Input placeholder="请输入用户名称" />)}
+              rules: [
+                { required: true, message: "Vui lòng nhập tên người dùng!" },
+              ],
+            })(<Input placeholder="Nhập tên người dùng" />)}
           </Form.Item>
-          <Form.Item label="用户角色:">
+          <Form.Item label="Quyền hajn:">
             {getFieldDecorator("role", {
               initialValue: "admin",
             })(
@@ -58,9 +60,11 @@ class AddUserForm extends Component {
               </Select>
             )}
           </Form.Item>
-          <Form.Item label="用户描述:">
-            {getFieldDecorator("description", {
-            })(<TextArea rows={4} placeholder="请输入用户描述" />)}
+          <Form.Item label="Mô tả:">
+            {getFieldDecorator(
+              "description",
+              {}
+            )(<TextArea rows={4} placeholder="Nhập mô tả" />)}
           </Form.Item>
         </Form>
       </Modal>

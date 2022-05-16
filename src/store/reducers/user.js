@@ -3,7 +3,7 @@ import { getToken } from "@/utils/auth";
 const initUserInfo = {
   name: "",
   role: "",
-  avatar:"",
+  avatar: "",
   token: getToken(),
 };
 export default function user(state = initUserInfo, action) {
@@ -11,7 +11,7 @@ export default function user(state = initUserInfo, action) {
     case types.USER_SET_USER_TOKEN:
       return {
         ...state,
-        token: action.token
+        token: action.token,
       };
     case types.USER_SET_USER_INFO:
       return {

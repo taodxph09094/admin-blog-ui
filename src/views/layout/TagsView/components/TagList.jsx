@@ -95,7 +95,7 @@ class TagList extends Component {
   handleCloseOtherTags = () => {
     const currentTag = this.state.currentTag;
     const { path } = currentTag;
-    this.props.closeOtherTags(currentTag)
+    this.props.closeOtherTags(currentTag);
     this.props.history.push(path);
     this.closeContextMenu();
   };
@@ -139,8 +139,8 @@ class TagList extends Component {
             style={{ left: `${left}px`, top: `${top}px` }}
             ref={this.contextMenuContainer}
           >
-            <li onClick={this.handleCloseOtherTags}>关闭其他</li>
-            <li onClick={this.handleCloseAllTags}>关闭所有</li>
+            <li onClick={this.handleCloseOtherTags}>Đóng</li>
+            <li onClick={this.handleCloseAllTags}>Đóng tất cả</li>
           </ul>
         ) : null}
       </>
